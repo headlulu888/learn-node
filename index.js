@@ -11,16 +11,14 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.get('/', (req, res) => {
-    res.render('index')
+    res.render('index', {weather: null, error: null})
 })
 
 app.post('/', async (req, res) => {
     const { city } = req.body
 
     const {weather, error} = await weatherRequest(city)
-    console.log('Weather: ', weather)
-    console.log('Error: ', error)
-    res.render('index')
+    res.render('index', {weather, error})
 })
 
 app.listen(3000, () => {
